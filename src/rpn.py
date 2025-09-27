@@ -1,5 +1,17 @@
-
-
 def eval_rpn(tokens):
-    # TODO: implement RPN evaluation using a stack
-    raise NotImplementedError
+    stack = []
+    for token in tokens:
+        if token not in {"+", "-", "*", "/"}:
+            stack.append(int(token))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            if token == "+":
+                stack.append(a + b)
+            elif token == "-":
+                stack.append(a - b)
+            elif token == "*":
+                stack.append(a * b)
+            elif token == "/":
+                stack.append(int(a / b))  # Truncate towards zero
+    return stack[0]
